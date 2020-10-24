@@ -1,9 +1,9 @@
 // TODO: Write code to define and export the Engineer class.  HINT: This class should inherit from Employee.
 const Employee = require("./Employee");
 
-function Engineer(idNumber, email, gitHub) {
-    Employee.call(this, idNumber, email);
-    this.gitHub = gitHub;
+function Engineer(id, email, github) {
+    Employee.call(this, id, email);
+    this.github = github;
 }
 
 Engineer.prototype = Object.create(Employee.prototype);

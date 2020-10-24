@@ -2,8 +2,8 @@
 
 const Employee = require("./Employee");
 
-function Manager(idNumber, email, officeNumber) {
-    Employee.call(this, idNumber, email);
+function Manager(id, email, officeNumber) {
+    Employee.call(this, id, email);
     this.officeNumber = officeNumber;
 }
 
