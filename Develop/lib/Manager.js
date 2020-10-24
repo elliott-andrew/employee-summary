@@ -2,9 +2,15 @@
 
 const Employee = require("./Employee");
 
-function Manager(id, email, officeNumber) {
-    Employee.call(this, id, email);
+function Manager(name, id, email, officeNumber) {
+    Employee.call(this, name, id, email);
     this.officeNumber = officeNumber;
+    this.getOfficeNumber = function () {
+        return this.officeNumber;
+    }
+    this.getRole = function () {
+        return "Manager";
+    }
 }
 
 Manager.prototype = Object.create(Employee.prototype);

@@ -2,9 +2,15 @@
 
 const Employee = require("./Employee");
 
-function Intern(id, email, school) {
-    Employee.call(this, id, email);
+function Intern(name, id, email, school) {
+    Employee.call(this, name, id, email);
     this.school = school;
+    this.getSchool = function () {
+        return this.school;
+    }
+    this.getRole = function () {
+        return "Intern"
+    }
 }
 
 Intern.prototype = Object.create(Employee.prototype);
