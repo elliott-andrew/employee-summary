@@ -13,7 +13,7 @@ function Intern(name, id, email, school) {
     }
     // function to return the role
     this.getRole = function () {
-        return "Intern"
+        return "Intern";
     }
 }
 // assign the employee methods to the intern

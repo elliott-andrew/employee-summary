@@ -14,16 +14,39 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-// questions for engineer, intern, manager
-// questions for all: ID Number, Email address
-// Extra question for engineer: Github
-// Extra question for manager: Office Number
-// Extra question for intern: School 
+const questions = [
+    {
+        type: "input",
+        message: "What is your name?",
+        name: "name"
+    },
+    {
+        type: "input",
+        message: "What is your employee ID number?",
+        name: "id"
+    },
+    {
+        type: "input",
+        message: "What is your work email address?",
+        name: "email"
+    },
+    {
+        type: "checkbox",
+        message: "What is your role?",
+        choices: ["Manager", "Engineer", "Inern"],
+        name: "employeeType"
+    },
 
-
+]
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+async function runPrompt() {
+    const response = await inquirer.prompt(questions);
+    console.log(response);
+}
+
+runPrompt();
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
