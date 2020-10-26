@@ -16,57 +16,101 @@ const render = require("./lib/htmlRenderer");
 const questions = [
     {
         type: "input",
-        message: "What is your name?",
+        message: "What is the employee's name?",
         name: "name"
     },
     {
         type: "input",
-        message: "What is your employee ID number?",
+        message: "What is the employee's ID number?",
         name: "id"
     },
     {
         type: "input",
-        message: "What is your work email address?",
+        message: "What is the employee's work email address?",
         name: "email"
     },
     {
         type: "list",
-        message: "What is your role?",
+        message: "What is the employee's role?",
         choices: ["Manager", "Engineer", "Intern"],
         name: "employeeType",
-    }
+    },
+    this.managerPrompt = inquirer.prompt(questions).concat([
+        {
+            type: "input",
+            message: "What is the manager's office number?",
+            name: "officeNumber"
+        }
+    ]),
+    this.engineerPrompt = inquirer.prompt(questions).concat([
+        {
+            type: "input",
+            message: "What is the engineer's GitHub username?",
+            name: "github"
+
+        }
+    ]),
+    this.internPrompt = inquirer.prompt(questions).concat([
+        {
+            type: "input",
+            message: "What school is the intern attending?",
+            name: "school"
+        }
+    ])
 ]
 
 async function runPrompt() {
     const response = await inquirer.prompt(questions)
-    if (response.employeeType === "Manager") {
-        inquirer.prompt([
-            {
-                type: "input",
-                message: "What is your office number?",
-                name: "officeNumber"
-            }
-        ])
-    } else if (response.employeeType === "Engineer") {
-        inquirer.prompt([
-            {
-                type: "input",
-                message: "What is your GitHub username?",
-                name: "github"
-            }
-        ])
-    } else if (response.employeeType === "Intern") {
-        inquirer.prompt([
-            {
-                type: "input",
-                message: "Which school are you attending?",
-                name: "school"
-            }
-        ])
+    // if (response.employeeType === "Manager") {
+    //     inquirer.prompt([
+    //         {
+    //             type: "input",
+    //             message: "What is your office number?",
+    //             name: "officeNumber"
+    //         }
+    //     ]).then((answer) => {
+
+    //     });
+    // } else if (response.employeeType === "Engineer") {
+    //     inquirer.prompt([
+    //         {
+    //             type: "input",
+    //             message: "What is your GitHub username?",
+    //             name: "github"
+    //         }
+    //     ])
+    // } else if (response.employeeType === "Intern") {
+    //     inquirer.prompt([
+    //         {
+    //             type: "input",
+    //             message: "Which school are you attending?",
+    //             name: "school"
+    //         }
+    //     ])
+    // }
+}
+
+async function employeePrompt(employeeType) {
+    switch (employeeType) {
+        case "Manager":
+            return inquirer.prompt(this.managerPrompt).then(function (response) {
+                return response;
+            });
+        case "Engineer":
+            return inquirer.prompt(this.engineerPrompt).then(function (response) {
+                return response;
+            });
+        case "Intern":
+            return inquirer.prompt(this.internPrompt).then(function (response) {
+                return response;
+            })
     }
 }
 
 runPrompt();
+
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
