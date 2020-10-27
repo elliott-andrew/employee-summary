@@ -15,6 +15,9 @@
   - [Questions](#Questions)
 
   ## Usage
+  Start program by running ```node app``` after installing dependencies.
+
+  Example of questions:
   ```
   ? What is the employee's name? Andrew
   ? What is the employee's ID number? 127001
@@ -28,7 +31,7 @@
   npm run test
 
   ## Installation
-  inquirer and jest are needed. run npm i to install all dependencies.  
+  Inquirer and Jest are needed. run npm i to install all dependencies.  
 
   ## License
   MIT License
