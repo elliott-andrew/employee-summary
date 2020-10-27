@@ -9,11 +9,9 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+// array to hold all added employees
 let allEmployees = [];
-
+// questions to populate employee data
 const questions = () => {
     inquirer.prompt([
         {
@@ -37,6 +35,7 @@ const questions = () => {
             choices: ["Manager", "Engineer", "Intern"],
             name: "employeeType",
         }
+        // questions specific to the type of employee
     ]).then(function (data) {
         if (data.employeeType === "Manager") {
             inquirer.prompt([
@@ -46,8 +45,11 @@ const questions = () => {
                     name: "officeNumber"
                 }
             ]).then(function (managerData) {
+                // create new manager with user input
                 let newManager = new Manager(data.name, data.id, data.email, managerData.officeNumber);
+                // push the new manager to the employee array
                 allEmployees.push(newManager);
+                // ask if the user would like to add another employee
                 nextEmployee();
             })
         }
@@ -59,8 +61,11 @@ const questions = () => {
                     name: "github"
                 }
             ]).then(function (engineerData) {
+                // create new engineer with user input
                 let newEngineer = new Engineer(data.name, data.id, data.email, engineerData.github);
+                // push the new manager to the employee array
                 allEmployees.push(newEngineer);
+                // ask if the user would like to add another employee
                 nextEmployee();
             });
         }
@@ -72,8 +77,11 @@ const questions = () => {
                     name: "school"
                 }
             ]).then(function (internData) {
+                // create new intern with user input
                 let newIntern = new Intern(data.name, data.id, data.email, internData.school);
+                // push the new intern to the employee array
                 allEmployees.push(newIntern);
+                // ask if the user would like to add another employee
                 nextEmployee();
             })
         }
@@ -81,6 +89,7 @@ const questions = () => {
 
 }
 
+// Would the user like to add another employee or render
 const nextEmployee = () => {
     inquirer.prompt([
         {
@@ -89,14 +98,18 @@ const nextEmployee = () => {
             name: "add"
         }
     ]).then(function (data) {
+        // if true, run the questions prompt again
         if (data.add === true) {
             questions();
         } else {
+            // if user is done, render the HTML
             fs.writeFile("team.html", render(allEmployees), function (err) {
                 if (err) {
+                    // if error rendering HTML
                     return console.log("Please try again.")
                 }
             });
+            // Success message
             console.log("HTML file successfully created. Thank you!")
         }
     })
