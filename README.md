@@ -31,7 +31,7 @@
   npm run test
 
   ## Installation
-  Inquirer and Jest are needed. run npm i to install all dependencies.  
+  Inquirer and Jest are needed. run ```npm i``` to install all dependencies.  
 
   ## License
   MIT License
