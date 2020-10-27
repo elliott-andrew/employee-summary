@@ -38,42 +38,48 @@ const questions = () => {
             name: "employeeType",
         }
     ]).then(function (data) {
-        console.log(data.employeeType);
+        if (data.employeeType === "Manager") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "What is the employee's office number?",
+                    name: "officeNumber"
+                }
+            ]).then(function (managerData) {
+                let newManager = new Manager(data.name, data.id, data.email, managerData.officeNumber);
+                allEmployees.push(newManager);
+            })
+        }
+        if (data.employeeType === "Engineer") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "What is your GitHub username?",
+                    name: "github"
+                }
+            ]).then(function (engineerData) {
+                let newEngineer = new Engineer(data.name, data.id, data.email, engineerData.github);
+                allEmployees.push(newEngineer);
+            })
+        }
+        if (data.employeeType === "Intern") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    message: "Which school are you attending?",
+                    name: "school"
+                }
+            ]).then(function (internData) {
+                let newIntern = new Intern(data.name, data.id, data.email, internData.school);
+                allEmployees.push(newIntern);
+            })
+        }
     })
 
 }
 
 questions();
-// async function runPrompt() {
-//     const response = await inquirer.prompt(questions)
-//     if (response.employeeType === "Manager") {
-//         inquirer.prompt([
-//             {
-//                 type: "input",
-//                 message: "What is your office number?",
-//                 name: "officeNumber"
-//             }
-//         ])
-//     } else if (response.employeeType === "Engineer") {
-//         inquirer.prompt([
-//             {
-//                 type: "input",
-//                 message: "What is your GitHub username?",
-//                 name: "github"
-//             }
-//         ])
-//     } else if (response.employeeType === "Intern") {
-//         inquirer.prompt([
-//             {
-//                 type: "input",
-//                 message: "Which school are you attending?",
-//                 name: "school"
-//             }
-//         ])
-//     }
-// }
 
-// runPrompt();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
